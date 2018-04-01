@@ -16,6 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.superpestana.springbootRest.auth.JwtService;
+import br.com.superpestana.springbootRest.model.ExceptionMessageResponse;
 import br.com.superpestana.springbootRest.model.LoginResponse;
 import br.com.superpestana.springbootRest.model.User;
 import br.com.superpestana.springbootRest.service.LoginService;
@@ -46,7 +47,9 @@ public class LoginResource {
 			String token = jwtService.generateNewToken(userFromDb);
 			return Response.ok(new LoginResponse(token)).header("Authentication", token).build();
 		}
-		return Response.status(Status.UNAUTHORIZED).build();
+		return Response.status(Status.UNAUTHORIZED).
+				entity(new ExceptionMessageResponse("Invalid user or password", Status.UNAUTHORIZED))
+				.build();
 	}
 
 }
