@@ -7,12 +7,16 @@ import javax.ws.rs.ext.Provider;
 
 import org.springframework.dao.DataIntegrityViolationException;
 
+import br.com.superpestana.springbootRest.model.ExceptionMessageResponse;
+
 @Provider
 public class DataIntegrityViolationExceptionMapper implements ExceptionMapper<DataIntegrityViolationException>{
 
 	@Override
 	public Response toResponse(DataIntegrityViolationException exception) {
-		return Response.status(Status.BAD_REQUEST).entity(exception.getClass().toString()).build(); 
+		return Response.status(Status.BAD_REQUEST)
+				.entity(new ExceptionMessageResponse(exception.getClass().getName().toString(), Status.BAD_REQUEST))
+				.build(); 
 	}
 
 }

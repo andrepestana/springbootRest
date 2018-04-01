@@ -47,7 +47,7 @@ public class UserResource {
     }
     
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(@RequestBody User user) {
     	User savedUser = service.save(user);

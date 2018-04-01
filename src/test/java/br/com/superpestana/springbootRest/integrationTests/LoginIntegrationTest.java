@@ -56,7 +56,7 @@ public class LoginIntegrationTest {
 		userRepository.save(createUser1());
 
 		ResponseEntity<String> user1LoginResponse2 = getUser1LoginResponseEntity();
-		assertEquals("Response wrong status", HttpStatus.NO_CONTENT.value(), user1LoginResponse2.getStatusCode().value());
+		assertEquals("Response wrong status", HttpStatus.OK.value(), user1LoginResponse2.getStatusCode().value());
 
 	}
 	

@@ -21,6 +21,8 @@ public class User {
 	private String lastName;
 	private Date birthday;
 	
+	
+	
 	public User() {
 		super();
 	}
@@ -32,6 +34,12 @@ public class User {
 		this.lastName = lastName;
 		this.birthday = birthday;
 	}
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+	
 	public Long getId() {
 		return id;
 	}

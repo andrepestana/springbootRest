@@ -58,7 +58,7 @@ public class UserIntegrationTest {
 		
 		// Admin logon 
 		ResponseEntity<User> adminLoginResponse = getAdminLoginResponseEntity();
-		assertEquals("Response wrong status", HttpStatus.NO_CONTENT.value(), adminLoginResponse.getStatusCode().value());
+		assertEquals("Response wrong status", HttpStatus.OK.value(), adminLoginResponse.getStatusCode().value());
 
 		String token = adminLoginResponse.getHeaders().get("Authentication").get(0);
 		
