@@ -5,26 +5,26 @@
 
 <div ng-app="myApp" ng-controller="myCtrl"> 
 
-<p>Data : <pre>{{content | json}}</pre></p>
+<h1>Login test</h1>
 <p>Status : {{statuscode}}</p>
-<p>StatusText : {{statustext}}</p>
+<p>Data : <pre>{{content | json}}</pre></p>
 
 </div>
 
-<p>The response object has many properties. This example demonstrate the value of the data, status, and statusText properties.</p>
+
 
 <script>
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
-  $http.post("/rest/login")
+  $http.post("/rest/login", {"username":"admin","password":"admin"})
   .then(function(response) {
       $scope.content = response.data;
       $scope.statuscode = response.status;
-      $scope.statustext = response.statusText;            
+          
   }).catch(function (err) {
   	  $scope.content = err.data;
       $scope.statuscode = err.status;
-      $scope.statustext = err.statusText;  
+
   });;
 });
 </script>
