@@ -9,24 +9,134 @@
 <p>Status : {{statuscode}}</p>
 <p>Data : <pre>{{content | json}}</pre></p>
 
+<h1>User creation test</h1>
+<p>Status : {{statuscode2}}</p>
+<p>Data : <pre>{{content2 | json}}</pre></p>
+
+<h1>List users test</h1>
+<p>Status : {{statuscode3}}</p>
+<p>Data : <pre>{{content3 | json}}</pre></p>
+
+<h1>Update user test</h1>
+<p>Status : {{statuscode4}}</p>
+<p>Data : <pre>{{content4 | json}}</pre></p>
+
+<h1>List user only user #{{newUserId}} after update</h1>
+<p>Status : {{statuscode5}}</p>
+<p>Data : <pre>{{content5 | json}}</pre></p>
+
+<h1>Delete user test</h1>
+<p>Status : {{statuscode6}}</p>
+<p>Data : <pre>{{content6 | json}}</pre></p>
+
+<h1>List users after delete</h1>
+<p>Status : {{statuscode7}}</p>
+<p>Data : <pre>{{content7 | json}}</pre></p>
+
 </div>
 
 
 
 <script>
+
 var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope, $http) {
+app.controller('myCtrl', function($scope, $http, $rootScope) {
+
+
   $http.post("/rest/login", {"username":"admin","password":"admin"})
   .then(function(response) {
       $scope.content = response.data;
       $scope.statuscode = response.status;
-          
+      $scope.token = response.data.token;
+      $scope.token = response.data.token;
+      console.log($scope.token);
+      
+      var headers = {headers:  {
+        'Authentication': $scope.token,
+		'Content-Type':'application/json'
+	    }
+	  };
+      
+      $http.post("/rest/auth/users", {username:'test',password:'test'}, headers)
+	  .then(function(response) {
+	      $scope.content2 = response.data;
+	      $scope.statuscode2 = response.status;
+	      $scope.newUserId = response.data.id;
+	      
+	            $http.get("/rest/auth/users", headers)
+				.then(function(response) {
+				$scope.content3 = response.data;
+				$scope.statuscode3 = response.status;
+				      
+				      
+				      $http.put("/rest/auth/users/"+$scope.newUserId, 
+					      {username:'test', 
+					      password:'test', 
+					      firstName: 'FirstName', 
+					      lastName: 'LastName', 
+					      birthday: (new Date()).getTime() }
+					      , headers)
+					  .then(function(response) {
+					  $scope.content4 = response.data;
+					  $scope.statuscode4 = response.status;
+					      
+					      	
+					      $http.get("/rest/auth/users/"+$scope.newUserId, headers)
+						  .then(function(response) {
+					      $scope.content5 = response.data;
+					      $scope.statuscode5 = response.status;
+						      
+						      	$http.delete("/rest/auth/users/"+$scope.newUserId, headers)
+								  .then(function(response) {
+								      $scope.content6 = response.data;
+								      $scope.statuscode6 = response.status;
+								      
+								      $http.get("/rest/auth/users", headers)
+									  .then(function(response) {
+									      $scope.content7 = response.data;
+									      $scope.statuscode7 = response.status;
+								      }).catch(function (err) {
+									  	  $scope.content7 = err.data;
+									      $scope.statuscode7 = err.status;
+									  });;
+									  
+								  }).catch(function (err) {
+								  	  $scope.content6 = err.data;
+								      $scope.statuscode6 = err.status;
+								  });;
+								  
+					      	}).catch(function (err) {
+							  	  $scope.content5 = err.data;
+							      $scope.statuscode5 = err.status;
+							  });;
+					      
+					  }).catch(function (err) {
+					  	  $scope.content4 = err.data;
+					      $scope.statuscode4 = err.status;
+					  });;
+				      
+				  }).catch(function (err) {
+				  	  $scope.content3 = err.data;
+				      $scope.statuscode3 = err.status;
+				  });;
+	      
+	  }).catch(function (err) {
+	  	  $scope.content2 = err.data;
+	      $scope.statuscode2 = err.status;
+	  });;
+      
+      
   }).catch(function (err) {
   	  $scope.content = err.data;
       $scope.statuscode = err.status;
 
   });;
+ 
+  
 });
+
+
+
 </script>
 
 </body>

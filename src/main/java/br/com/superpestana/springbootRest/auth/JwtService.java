@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import br.com.superpestana.springbootRest.model.User;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -26,7 +27,7 @@ public class JwtService {
 	
 	public void validateToken(HttpServletRequest req) throws ServletException, AuthException {
 		String token = req.getHeader("Authentication");
-		if (token == null) {
+		if (StringUtils.isEmpty(token)) {
 			throw new AuthException("Invalid token");
 		}
 		try {

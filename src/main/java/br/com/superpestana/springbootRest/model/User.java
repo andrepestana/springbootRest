@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 public class User {
 
@@ -19,6 +22,8 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
+	@JsonSerialize(as = Date.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd hh:mm:ss")
 	private Date birthday;
 	
 	

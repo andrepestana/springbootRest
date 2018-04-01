@@ -52,7 +52,8 @@ public class UserResource {
     public Response save(@RequestBody User user) {
     	User savedUser = service.save(user);
     	URI uri = URI.create("/auth/users/" + savedUser.getId());
-    	return Response.created(uri).build();
+    	savedUser.setPassword("******");
+    	return Response.created(uri).entity(savedUser).build();
     }
 
     @PUT
