@@ -1,0 +1,25 @@
+{{message}}	
+<form name="updateUserForm" ng-submit="updateUser()">
+	<div>
+		First Name <input type="text" required
+			placeholder="" ng-model="user.firstName" ng-value="user.firstName"/>
+	</div>
+	<div>
+		Last Name Name <input type="text" required
+			placeholder="" ng-model="user.lastName" ng-value="user.lastName"/>
+	</div>
+	<div>
+		Username <input type="text" required
+			placeholder="" ng-model="user.username" ng-value="user.username"/>
+	</div>
+
+	<div>
+		<input type="submit" value="Update" />
+	</div>
+</form>
+
+<div>
+	<ul>
+		<li><a href="#/users">Back to Users</a></li>
+	</ul>
+</div>

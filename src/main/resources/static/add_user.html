@@ -1,0 +1,25 @@
+{{message}}
+<form name="addUserForm" ng-submit="addUser()">
+	<div>
+		First Name <input type="text" required placeholder=""
+			ng-model="user.firstName" />
+	</div>
+	<div>
+		Last Name Name <input type="text" required placeholder=""
+			ng-model="user.lastName" />
+	</div>
+	<div>
+		Username <input type="text" required placeholder=""
+			ng-model="user.username" />
+	</div>
+
+	<div>
+		<input type="submit" value="Add" />
+	</div>
+</form>
+
+<div>
+	<ul>
+		<li><a href="#/users">Back to Users</a></li>
+	</ul>
+</div>

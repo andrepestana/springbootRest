@@ -1,0 +1,34 @@
+<div>Users</div>
+<div>
+	<ul>
+		<li><a href="#/new_user">Create User</a></li>
+	</ul>
+</div>
+{{message}}	
+<table border="1">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>User Name</th>
+			<th>Delete</th>
+			<th>Update</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in users">
+			<td>{{user.id}}</td>
+			<td>{{user.firstName}}</td>
+			<td>{{user.lastName}}</td>
+			<td>{{user.username}}</td>
+			<td><button ng-click="deleteUser(user.id)">Delete</button></td>
+			<td><button ng-click="editUser(user)">update</button></td>
+		</tr>
+	</tbody>
+</table>
+<div>
+	<ul>
+		<li><a href="#/index">Back to Main</a></li>
+	</ul>
+</div>

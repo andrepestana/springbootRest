@@ -34,7 +34,7 @@ public class AuthFilter extends GenericFilterBean {
 		try {
 			jwtService.validateToken(req);
 		} catch (AuthException e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
             return ;
 		}
 		chain.doFilter(request, response);
